@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import ClientLayout from "./layout/ClientLayout"
 import Home from "./pages/Home"
+import Pago from "./pages/pago"
 
 function App() {
   return (
@@ -9,6 +10,8 @@ function App() {
         <Routes>
           <Route path="/" element={<ClientLayout/>}>
             <Route index  element={<Home/>}/>
+            <Route path="pago"  element={<Pago/>}/>
+
           </Route>
         </Routes>
       </BrowserRouter>
