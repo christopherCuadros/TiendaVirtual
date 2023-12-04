@@ -1,0 +1,122 @@
+[
+    {
+        "codigo":1,
+        "nombre":"Producto 1",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":20.00
+    },
+    {
+        "codigo":2,
+        "nombre":"Producto 2",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":87.80
+    },
+    {
+        "codigo":3,
+        "nombre":"Producto 3",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":89.00
+    },
+    {
+        "codigo":4,
+        "nombre":"Producto 4",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":90.00
+    },
+    {
+        "codigo":5,
+        "nombre":"Producto 5",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":178.00
+    },
+    {
+        "codigo":6,
+        "nombre":"Producto 6",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":69.00
+    },
+    {
+        "codigo":7,
+        "nombre":"Producto 7",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":90.00
+    },
+    {
+        "codigo":8,
+        "nombre":"Producto 8",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":90.00
+    },
+    {
+        "codigo":9,
+        "nombre":"Producto 9",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":100.89
+    },
+    {
+        "codigo":10,
+        "nombre":"Producto 10",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":16.89
+    },
+    {
+        "codigo":11,
+        "nombre":"Producto 11",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":76.88
+    },
+    {
+        "codigo":12,
+        "nombre":"Producto 12",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":96.43
+    },
+    {
+        "codigo":13,
+        "nombre":"Producto 13",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":53.29
+    },
+    {
+        "codigo":14,
+        "nombre":"Producto 14",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":53.21
+    },
+    {
+        "codigo":15,
+        "nombre":"Producto 15",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":26.89
+    },
+    {
+        "codigo":16,
+        "nombre":"Producto 16",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":12.21
+    },
+    {
+        "codigo":17,
+        "nombre":"Producto 17",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":21.90
+    },
+    {
+        "codigo":18,
+        "nombre":"Producto 18",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":23.23
+    },
+    {
+        "codigo":19,
+        "nombre":"Producto 19",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":77.00
+    },
+    {
+        "codigo":20,
+        "nombre":"Producto 20",
+        "descripcion":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo doloremque, illum omnis alias consectetur! Dolores, quaerat repellat! Explicabo ipsum sed possimus fuga libero ullam vitae pariatur accusamus et maxime.",
+        "precio":67.53
+    }
+]
