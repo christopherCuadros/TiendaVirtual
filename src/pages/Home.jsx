@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import CardProduct from "../components/CardProduct"
 import FilterCategory from "../components/FilterCategory"
 import data from "../data/product.json"
@@ -23,14 +22,4 @@ export default function Home() {
 
     </div>
   )
-=======
-import { Login } from "../components/login";
-
-export default function Home() {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
->>>>>>> 80b6d7c (Modal del Login)
 }
