@@ -1,7 +1,9 @@
 const Footer = () => {
     return(
         
-        <div>Footer</div>
+        <div className="w-full h-12 flex justify-center items-center bg-black text-white">
+            Derechos reservados Tgh Technology solution @copyRight
+        </div>
         
     )
 }

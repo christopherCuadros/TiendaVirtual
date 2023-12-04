@@ -1,13 +1,14 @@
-import Navbar from "../components/Navbar";
+import { Outlet } from "react-router-dom"
 import Footer from "../components/Footer";
-import Pago from "../pages/pago";
+import StickyNavbar from "../components/StickyNavbar";
+
 const ClientLayout = () => {
     return(
         <>
-            <Navbar/>
-                <div>client layout</div>
-
-                <Pago/>
+            <StickyNavbar/>
+                <div>
+                    <Outlet/>
+                </div>
             <Footer/>
         </>
         
