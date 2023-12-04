@@ -1,10 +1,14 @@
-import Navbar from "../components/Navbar";
+import { Outlet } from "react-router-dom"
 import Footer from "../components/Footer";
+import StickyNavbar from "../components/StickyNavbar";
+
 const ClientLayout = () => {
     return(
         <>
-            <Navbar/>
-                <div>client layout</div>
+            <StickyNavbar/>
+                <div>
+                    <Outlet/>
+                </div>
             <Footer/>
         </>
         
