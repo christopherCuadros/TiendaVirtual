@@ -1,6 +1,20 @@
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 
 const Carrito = () => {
+    const [cantidad, setCantidad] = useState(1);
+
+    const incrementar = () => {
+        if (cantidad < 20) {
+            setCantidad(cantidad + 1);
+        }
+    };
+
+    const disminuir = () => {
+        if (cantidad > 1) {
+            setCantidad(cantidad - 1);
+        }
+    };
     return (
         <main className=" my-12 bg-gray-200">
             <div className="md:mx-12 xl:mx-[12rem] 2xl:mx-[18rem] md:grid flex flex-col md:flex-none md:grid-cols-3 py-2">
@@ -16,11 +30,17 @@ const Carrito = () => {
                                 <div className="flex justify-between">
                                     <p>Precio:</p>
                                     <div className="flex gap-2 items-center">
-                                        <button type="button">
+                                        <button
+                                            type="button"
+                                            onClick={incrementar}
+                                        >
                                             <PlusCircleIcon className="h-5 w-5" />
                                         </button>
-                                        <p>1</p>
-                                        <button type="button">
+                                        <p>{cantidad}</p>
+                                        <button
+                                            type="button"
+                                            onClick={disminuir}
+                                        >
                                             <MinusCircleIcon className="h-5 w-5" />
                                         </button>
                                     </div>
