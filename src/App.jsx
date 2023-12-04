@@ -1,8 +1,9 @@
+import ClientLayout from "./layout/ClientLayout"
 function App() {
 
   return (
     <>
-      <div>PRINCIPAL</div>
+      <ClientLayout/>
     </>
   )
 }
