@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
+import { Login } from "./login";
 
 const StickyNavbar = () => {
     const [openNav, setOpenNav] = useState(false);
@@ -28,9 +29,10 @@ const StickyNavbar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="#" className="flex items-center">
-                    Pages
-                </a>
+                <Link to={"/"} className="flex items-center">
+                    Home
+                </Link>
+               
             </Typography>
             <Typography
                 as="li"
@@ -60,7 +62,7 @@ const StickyNavbar = () => {
                 className="p-1 font-normal"
             >
                 <Badge content="5">
-                    <Link to={"/carrito"} className="flex items-center">
+                    <Link to={"/shopping-cart"} className="flex items-center">
                     <ShoppingCartIcon className="h-6 w-6"/>
 
                     </Link>
@@ -84,20 +86,7 @@ const StickyNavbar = () => {
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
                         <div className="flex items-center gap-x-1">
-                            <Button
-                                variant="text"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <span>Log In</span>
-                            </Button>
-                            <Button
-                                variant="gradient"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <span>Sign in</span>
-                            </Button>
+                                <Login/>
                         </div>
                         <IconButton
                             variant="text"

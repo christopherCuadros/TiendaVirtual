@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<ClientLayout/>}>
             <Route index  element={<Home/>}/>
 
-            <Route path="carrito" element={<Carrito />} />
+            <Route path="shopping-cart" element={<Carrito />} />
             
           </Route>
           <Route path="/admin" element={<AdminLayout/>}>

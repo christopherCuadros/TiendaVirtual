@@ -7,14 +7,17 @@ import {
   Button,
 } from "@material-tailwind/react";
 import PropTypes from 'prop-types'
+import { useState } from "react";
 
-const CardProduct = ({nombre,descripcion,precio}) => {
-    // const style = {
-    //     border:"1px solid-black"
-    // }
+const CardProduct = ({nombre,descripcion,precio,styleClass}) => {
+  const [style,setStyle] = useState("w-96 mx-auto lg:w-auto  shadow-black")
+  if(styleClass != ""){
+    setStyle(styleClass);
+  }
+
 
   return (
-    <Card className="w-96 mx-auto lg:w-auto  shadow-black" >
+    <Card className={style} >
       <CardHeader shadow={false} floated={false} className="h-96">
         <img
           src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
@@ -56,7 +59,8 @@ CardProduct.propTypes = {
     key: PropTypes.number,
     nombre: PropTypes.string,
     descripcion: PropTypes.string,
-    precio: PropTypes.number
+    precio: PropTypes.number,
+    styleClass: PropTypes.string
 }
 
 export default CardProduct;
