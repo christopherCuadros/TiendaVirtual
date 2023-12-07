@@ -10,10 +10,11 @@ import {
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { Login } from "./login";
+import { useCarritoContext } from "../hook/useCarrito";
 
 const StickyNavbar = () => {
     const [openNav, setOpenNav] = useState(false);
-
+    const {cantidadProductos} = useCarritoContext()
     useEffect(() => {
         window.addEventListener(
             "resize",
@@ -61,7 +62,7 @@ const StickyNavbar = () => {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <Badge content="5">
+                <Badge content={cantidadProductos()}>
                     <Link to={"/shopping-cart"} className="flex items-center">
                     <ShoppingCartIcon className="h-6 w-6"/>
 
