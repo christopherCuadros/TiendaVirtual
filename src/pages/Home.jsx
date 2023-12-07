@@ -1,6 +1,6 @@
 import FilterCategory from "../components/FilterCategory"
 import ProductsList from "../components/ProductList"
-import CarrouselProducts from "../components/CarrouselProducts"
+// import CarrouselProducts from "../components/CarrouselProducts"
 export default function Home() {
   return (
     <div className="p-2">
@@ -9,7 +9,7 @@ export default function Home() {
       </div>
       <div className="my-9 bg-red-800">
         <p className="text-4xl font-semibold text-center">Mas Vendidos</p>
-        <CarrouselProducts/>
+        {/* <CarrouselProducts/> */}
       </div>
 
       <div className="grid gap-2 lg:grid-cols-4 mx-auto md:grid-cols-2">

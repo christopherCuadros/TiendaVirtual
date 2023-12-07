@@ -6,7 +6,6 @@ const ProductsList = () =>{
         <>
             {data.map(producto =>(
                 <CardProduct
-                    key={producto.codigo}
                     nombre={producto.nombre}
                     descripcion={producto.descripcion}
                     precio={producto.precio}     
