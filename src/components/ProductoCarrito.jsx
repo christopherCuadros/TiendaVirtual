@@ -11,19 +11,19 @@ const ProductoCarrito = ({ carrito }) => {
 
     const [newCantidad,setNewcantidad] = useState(cantidad)
 
-    function increase(id){
-      setNewcantidad((prevCantidad) => prevCantidad + 1);
-      actualizarCantidad({id,cantidad:newCantidad})
-    };
+    // function increase(id){
+    //   setNewcantidad((prevCantidad) => prevCantidad + 1);
+    //   actualizarCantidad({id,cantidad:newCantidad})
+    // };
 
-    function dismuss (id) {
-      setNewcantidad((prevCantidad) => {
-        const newCantidad = Math.max(prevCantidad - 1, 1); // Garantiza que la nueva cantidad no sea menor que 1
-        console.log("Nueva Cantidad (dismuss):", newCantidad);
-        return newCantidad;
-      });
-      actualizarCantidad({id,cantidad:newCantidad});
-    };
+    // function dismuss (id) {
+    //   setNewcantidad((prevCantidad) => {
+    //     const newCantidad = Math.max(prevCantidad - 1, 1); // Garantiza que la nueva cantidad no sea menor que 1
+    //     console.log("Nueva Cantidad (dismuss):", newCantidad);
+    //     return newCantidad;
+    //   });
+    //   actualizarCantidad({id,cantidad:newCantidad});
+    // };
 
     return (
         <tr className="even:bg-blue-gray-50/50">

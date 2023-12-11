@@ -20,7 +20,7 @@ export default function Products() {
     }, []);
   return (
     <>
-      <div>
+      <div className="py-3">
         <RegisterProduct/>
       </div>
       <div>

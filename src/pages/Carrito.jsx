@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductoCarrito from "../components/ProductoCarrito";
 import { useCarritoContext } from "../hook/useCarrito";
 import { Card, Typography } from "@material-tailwind/react";
+import { postSale } from "../services/apiService";
 
 const Carrito = () => {
     const IGV = 0.18;
@@ -20,9 +21,25 @@ const Carrito = () => {
         setTotal((totalAcumulado+getTotalIgv).toFixed(2))
       }, [carrito]);
 
-    return (
+      const saveSale = () =>{
+        const bodyCarrito = JSON.stringify(carrito);
+        console.log(bodyCarrito)
+        const body={
+          total:total,
+          idUsuario:1,
+          detalles:[
+            {
+              idProducto:bodyCarrito[0].id,
+              cantidad:carrito.cantidad,
+              precioUnitario: carrito.precio,
+              subtotal:(carrito.precio*carrito.cantidad)
+            }
+          ]
+        }
+        console.log(JSON.stringify(body));
+      }
     
-
+    return (
       <main className="bg-gray-200 h-[80vh] lg:p-2">
         <div className="lg-mx-2 lg:flex lg:flex-row lg:mt-5">
           <div className="bg-white rounded-lg lg:w-4/5 mx-2 h-auto p-2">
@@ -77,6 +94,7 @@ const Carrito = () => {
                         <button
                             type="buttom"
                             className="bg-black w-full py-2 rounded "
+                            onClick={saveSale}
                             >Pagar</button>
                     </Typography>
                     
