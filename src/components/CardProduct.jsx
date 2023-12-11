@@ -29,6 +29,7 @@ const CardProduct = ({ id, nombre, descripcion, precio }) => {
             descripcion,
             cantidad: 1,
         };
+        
         agregarCarrito(productoSeleccionado);
         toast.success("Podructo agregado al carrito", {
             theme: "colored",

@@ -2,103 +2,89 @@
 import { useEffect, useState } from "react";
 import ProductoCarrito from "../components/ProductoCarrito";
 import { useCarritoContext } from "../hook/useCarrito";
+import { Card, Typography } from "@material-tailwind/react";
 
 const Carrito = () => {
+    const IGV = 0.18;
     const { carrito } = useCarritoContext()
+    const [subTotal, setSubTotal] = useState(0);
     const [total, setTotal] = useState(0);
-
+    const tableHead = ["producto","Descripción","Precio","Cantidad","Subtotal","Accion"]
     useEffect(() => {
         const totalAcumulado = carrito.reduce(
           (variableTotal, producto) => variableTotal + producto.cantidad * producto.precio,
           0
         );
-        setTotal(totalAcumulado);
+        setSubTotal(totalAcumulado.toFixed(2));
+        const getTotalIgv = totalAcumulado*IGV;
+        setTotal((totalAcumulado+getTotalIgv).toFixed(2))
       }, [carrito]);
+
     return (
-        // <main className=" bg-gray-200 h-[80vh]">
-        //     <div className="md:mx-12 xl:mx-[12rem] 2xl:mx-[18rem] md:grid flex flex-col md:flex-none md:grid-cols-3 py-2 bg-red-300 h-auto">
-        //         <div className="md:col-[1/3] bg-white md:mx-2 rounded-lg">
-        //             <header className="md:ml-5 mt-2">
-        //                 <p className="font-bold">Cesta de la compra</p>
-        //             </header>
-        //             <div className="px-4 xl:px-12 my-5 ">
-        //                 <div className="border-b border-gray-300 md:grid md:grid-col-5">
-        //                     {/* <img src="" alt="" className="md:col-[1/2]" /> */}
-        //                     <div className="md:col-[2/5]">
-        //                         <p>P: </p>
+    
 
-        //                         <div className="flex justify-between">
-        //                             <p>Precio:</p>
-        //                             {/* <div className="flex gap-2 items-center">
-        //                                 <button
-        //                                         type="button"
-        //                                         onClick={disminuir}
-        //                                     >
-        //                                         <MinusCircleIcon className="h-5 w-5" />
-        //                                 </button>
-        //                                     <p>{cantidad}</p>
-
-        //                                 <button
-        //                                     type="button"
-        //                                     onClick={incrementar}
-        //                                 >
-        //                                     <PlusCircleIcon className="h-5 w-5" />
-        //                                 </button>
-        //                             </div> */}
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //                 <div className="border-b border-gray-300">HOLA</div>
-        //                 <div className="border-b border-gray-300">HOLA</div>
-        //             </div>
-        //         </div>
-        //         <div className="md:col-[3/4] bg-white md:mx-2 border rounded-lg p-4">
-        //             <h3>Resumen Total</h3>
-        //         </div>
-        //     </div>
-        // </main>
-
-        <main className="bg-gray-200 h-[80vh]">
-            <div className="md:mx-12 xl:mx-[12rem] 2xl:mx-[18rem] md:grid flex flex-col md:flex-none md:grid-cols-3 py-2 bg-red-300 h-auto ">
-                <div className="md:col-[1/3] bg-white md:mx-2 rounded-lg">
-                    <header className="md:ml-5 mt-2">
-                        <p className="font-bold font-sans lg:text-2xl border-b border-black">MI CARRITO</p>
-                    </header>
-                    <table className="table w-full my-12">
-                        <thead>
-                            <tr>
-                                <th className="w-[20%]" >Producto</th>
-                                <th className="w-[20%]" >Descripcion</th>
-                                <th className="w-[20%]" >Cantidad</th>
-                                <th className="w-[20%]" >Precio unitario</th>
-                                <th className="w-[15%]" >Subtotal</th>
-                                <th className="w-[5%]" >Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {carrito && carrito.length
-                                ? carrito.map((carrito) => (
+      <main className="bg-gray-200 h-[80vh] lg:p-2">
+        <div className="lg-mx-2 lg:flex lg:flex-row lg:mt-5">
+          <div className="bg-white rounded-lg lg:w-4/5 mx-2 h-auto p-2">
+            <Card className="h-full w-full overflow-scroll">
+                <table className="w-full min-w-max table-auto text-left">
+                    <thead>
+                    <tr>
+                        {tableHead.map((head) => (
+                        <th key={head} className="border-b border-blue-gray-100 bg-black p-4">
+                            <Typography
+                            variant="small"
+                            color="white"
+                            className="font-normal leading-none"
+                            >
+                            {head}
+                            </Typography>
+                        </th>
+                        ))}
+                    </tr>
+                    </thead>
+                    <tbody>
+                         {carrito && carrito.length
+                               ? carrito.map((carrito) => (
                                     <ProductoCarrito
-                                        key={carrito.id}
-                                        carrito={carrito}
-                                    />
-                                ))
-                                : null}
-                        </tbody>
-                    </table>
+                                       key={carrito.id}
+                                       carrito={carrito}
+                                   />      
+                               ))
+                               : null} 
+                    </tbody>
+                </table>
+            </Card>
+
+          </div>
+          <div className="bg-white rounded-lg lg:w-[20%] mx-2 h-72">
+            <div className="grid m-2 p-2 h-64 ">
+                <div className="grid gap-1">
+                    <p className="font-bold text-3xl">SUBTOTAL</p>
+                    <p className="font-semibold">S/ <span className="font-normal text-2xl">{subTotal}</span></p>
                 </div>
-                <div className="md:col-[3/4] bg-white md:mx-2 border rounded-lg p-4">
-                    <div className="border-b border-gray-500">
-                        <h3>Resumen Total</h3>
-                    </div>
-                    <div className="">
-                        <p>subTotal</p>
-                        <p>{total}</p>
-                    </div>
+                
+                <div>
+                    <p className="font-semibold">IGV <span className="font-normal text-2xl">18%</span></p>
+                </div>
+                <div className="flex flex-col">
+                    <p className="font-normal text-2xl">Total </p>
+                    <span className=" ml-4 text-2xl">{total}</span>
+                </div>
+                <hr className="border-black" />
+                <div>
+                    <Typography variant="small" color="white" className="font-normal">
+                        <button
+                            type="buttom"
+                            className="bg-black w-full py-2 rounded "
+                            >Pagar</button>
+                    </Typography>
+                    
                 </div>
             </div>
-
-        </main>
+          </div>
+        </div>
+      </main>
     );
 };
 export default Carrito;
