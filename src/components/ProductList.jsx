@@ -26,6 +26,7 @@ const ProductsList = () =>{
             try {
               const data = await getAllProducts();
               setProductos(data);
+              console.log("PROBAR ID DE LOS PRODUCTOS QUE ME MANDA"+JSON.stringify(data))
             } catch (error) {
               console.error('Error al obtener productos', error);
             }
@@ -39,7 +40,7 @@ const ProductsList = () =>{
             {productos && productos.map((producto, index) =>(
                 <CardProduct
                     key={index}
-                    id={index}
+                    id={producto.id}
                     nombre={producto.nombre}
                     descripcion={producto.descripcion}
                     precio={producto.precio}     

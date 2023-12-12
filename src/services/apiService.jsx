@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const BASE_ROUTE = import.meta.env.VITE_ROUTE_API;
@@ -39,10 +40,20 @@ export const getAllProducts = async () => {
 };
 
 export const postSale = async (data) => {
+    let status = false;
     try {
-
-        const response = await axios.post(`${BASE_ROUTE}/producto`,body);
-        return response.data;
+        
+        const response = await axios.post(`${BASE_ROUTE}/venta`,JSON.stringify(data),{
+            headers:{
+                'Content-Type':'application/json'
+            }  
+        });
+        
+        if(typeof response.data === 'object'){
+            status=true;
+        }else{
+            return status;
+        }
     } catch (error) {
         if (error.response) {
             // El servidor respondió con un código de estado fuera del rango 2xx
@@ -57,7 +68,9 @@ export const postSale = async (data) => {
             console.error('Error al configurar la solicitud:', error.message);
             throw new Error('Error de parte del cliente: Configuración de solicitud incorrecta');
         }
+        
     }
+    return status;
 }
 
 

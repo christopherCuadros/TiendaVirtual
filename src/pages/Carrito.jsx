@@ -4,13 +4,14 @@ import ProductoCarrito from "../components/ProductoCarrito";
 import { useCarritoContext } from "../hook/useCarrito";
 import { Card, Typography } from "@material-tailwind/react";
 import { postSale } from "../services/apiService";
+import { toast } from "react-toastify";
 
 const Carrito = () => {
     const IGV = 0.18;
     const { carrito } = useCarritoContext()
     const [subTotal, setSubTotal] = useState(0);
     const [total, setTotal] = useState(0);
-    const tableHead = ["producto","Descripción","Precio","Cantidad","Subtotal","Accion"]
+    const tableHead = ["producto","Descripción","Cantidad","Precio","Subtotal","Accion"]
     useEffect(() => {
         const totalAcumulado = carrito.reduce(
           (variableTotal, producto) => variableTotal + producto.cantidad * producto.precio,
@@ -21,22 +22,35 @@ const Carrito = () => {
         setTotal((totalAcumulado+getTotalIgv).toFixed(2))
       }, [carrito]);
 
-      const saveSale = () =>{
-        const bodyCarrito = JSON.stringify(carrito);
-        console.log(bodyCarrito)
+      const saveSale = async() =>{
+        let bodyDetail =[];
+        carrito.map((bodyCarrito) =>{
+          bodyDetail.push(
+            {
+              idProducto:bodyCarrito.id,
+              cantidad:bodyCarrito.cantidad,
+              precioUnitario:bodyCarrito.precio,
+              subtotal:(bodyCarrito.precio*bodyCarrito.cantidad)
+            }
+          )
+        })
+
         const body={
           total:total,
           idUsuario:1,
-          detalles:[
-            {
-              idProducto:bodyCarrito[0].id,
-              cantidad:carrito.cantidad,
-              precioUnitario: carrito.precio,
-              subtotal:(carrito.precio*carrito.cantidad)
-            }
-          ]
+          detalles:bodyDetail
         }
-        console.log(JSON.stringify(body));
+        const responseSave = await postSale(body)
+        console.log(responseSave)
+        if(responseSave){
+          toast("Venta Exitosa",{
+            type:"success"
+          });
+        }
+        toast("Su venta no se pudo completar",{
+          type:"error"
+        });
+
       }
     
     return (
@@ -46,19 +60,19 @@ const Carrito = () => {
             <Card className="h-full w-full overflow-scroll">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>
-                    <tr>
-                        {tableHead.map((head) => (
-                        <th key={head} className="border-b border-blue-gray-100 bg-black p-4">
-                            <Typography
-                            variant="small"
-                            color="white"
-                            className="font-normal leading-none"
-                            >
-                            {head}
-                            </Typography>
-                        </th>
-                        ))}
-                    </tr>
+                      <tr>
+                          {tableHead.map((head) => (
+                          <th key={head} className="border-b border-blue-gray-100 bg-black p-4">
+                              <Typography
+                              variant="small"
+                              color="white"
+                              className="font-normal leading-none"
+                              >
+                              {head}
+                              </Typography>
+                          </th>
+                          ))}
+                      </tr>
                     </thead>
                     <tbody>
                          {carrito && carrito.length
