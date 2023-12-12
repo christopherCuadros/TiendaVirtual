@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import ProductoCarrito from "../components/ProductoCarrito";
 import { useCarritoContext } from "../hook/useCarrito";
 import { Card, Typography } from "@material-tailwind/react";
-import { postSale } from "../services/apiService";
-import { toast } from "react-toastify";
 
 const Carrito = () => {
     const IGV = 0.18;
