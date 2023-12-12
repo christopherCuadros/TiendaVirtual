@@ -1,12 +1,8 @@
-import axios from 'axios';
-
-
-const BASE_ROUTE = import.meta.env.VITE_ROUTE_API;
-
+import { apiBack } from "./api";
 
 export const getAllProducts = async () => {
     try {
-        const response = await axios.get(`${BASE_ROUTE}/producto`);
+        const response = await apiBack('/producto');
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -23,25 +19,35 @@ export const getAllProducts = async () => {
             throw new Error('Error de parte del cliente: Configuración de solicitud incorrecta');
         }
     }
-
-    /*try {
-        const response = await axios.get(`${BASE_ROUTE}/producto`);
-        if (!response.ok) {
-            throw new Error("Error al obtener datos2");
-        }
-        console.log(response.data)
-        return response.data;
-    } catch (error) {
-        console.log(error)
-        throw new Error("Error de parte del cliente");
-    }}*/
-    
 };
 
-export const postSale = async (data) => {
+export const postProduct = async (product) => {
     try {
+        const { data } = await apiBack.post('/producto',product)
+        return {
+            status: true,
+            data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-        const response = await axios.post(`${BASE_ROUTE}/producto`,body);
+export const destroyProduct = async (id) => {
+    try {
+        const { data } = await apiBack.delete(`/producto/${id}`)
+        return {
+            status: true,
+            data
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getCategoriesProd = async () => {
+    try {
+        const response = await apiBack('/categoria');
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -59,5 +65,3 @@ export const postSale = async (data) => {
         }
     }
 }
-
-
