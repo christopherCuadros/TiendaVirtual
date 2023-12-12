@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Link, Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export function AdminLayout() {
   const [open, setOpen] = useState(0);
@@ -107,6 +108,7 @@ export function AdminLayout() {
           <Outlet />
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }
