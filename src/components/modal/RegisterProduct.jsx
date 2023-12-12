@@ -8,22 +8,18 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
-import { getCategoriesProd, postProduct } from "../../services/apiService";
+import { getCategoriesProd, postProduct, updateProduct } from "../../services/apiService";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
-const iniStateProduct = {
-  nombre: "",
-  descripcion: "",
-  precio: 0,
-  stock: 0,
-  imagen: "",
-  idCategoria: 0,
-  estado: true,
-};
-
-const RegisterProduct = ({ getProducts }) => {
-  const [open, setOpen] = useState(false);
+const RegisterProduct = ({
+  getProducts,
+  product,
+  iniStateProduct,
+  open,
+  setOpen,
+  refreshProduct
+}) => {
   const [category, setCategory] = useState([]);
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -37,25 +33,37 @@ const RegisterProduct = ({ getProducts }) => {
     callCategory();
   }, []);
 
+  useEffect(() => {
+    setFormData(product);
+  }, [product]);
+
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Aquí puedes implementar la lógica para enviar los datos al servidor
-    console.log("Datos del formulario enviados:", formData);
-    const result = await postProduct(formData);
-    if (result.status === true) {
-      getProducts(result.data);
-
-      setOpen(!open);
-      setFormData(iniStateProduct);
-      toast("Se registro con exito", {
-        type: "success",
-      });
+    if (!formData?.id) {
+      
+      const result = await postProduct(formData);
+      if (result.status === true) {
+        getProducts(result.data);
+  
+        setOpen(!open);
+        setFormData(iniStateProduct);
+        toast("Se registro con exito", {
+          type: "success",
+        });
+      }
+      return;
     }
+    const resultUpdate = await updateProduct(formData)
+    refreshProduct(resultUpdate.data)
+    setOpen(!open);
+        setFormData(iniStateProduct);
+        toast("Se actualizo con exito", {
+          type: "success",
+        });
   };
 
   return (
@@ -72,13 +80,16 @@ const RegisterProduct = ({ getProducts }) => {
         size="xl"
         open={open}
         handler={handleOpen}
+        dismiss={{
+          outsidePress: false,
+        }}
         className="bg-transparent shadow-none"
       >
         <form onSubmit={handleSubmit}>
           <Card className="mx-auto w-full max-w-[1000px]">
             <CardBody className="flex flex-col gap-4 ">
               <Typography variant="h4" color="blue-gray">
-                Registrar Producto
+                {formData?.id ? "Actualizar Producto" : "Agregar Producto"}
               </Typography>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-4">
@@ -157,28 +168,37 @@ const RegisterProduct = ({ getProducts }) => {
                   <Typography className="-mb-2" variant="h6">
                     IdCategoria
                   </Typography>
-                    <select
-                        className=""
-                        onChange={(e) =>
-                        handleInputChange("idCategoria", e.target.value)
-                        }
-                        defaultValue={iniStateProduct.idCategoria || "0"} // Use an empty string or "0" as a default value if iniStateProduct.idCategoria is undefined
-                    >
-                        <option value="0">Seleccionar</option>
-                        {category.map((cat) => (
-                        <option key={cat.id} value={cat.id}>
-                            {cat.nombre}
-                        </option>
-                        ))}
-                    </select>
+                  <select
+  className=""
+  onChange={(e) =>
+    handleInputChange("idCategoria", e.target.value)
+  }
+  value={formData.idCategoria.toString() || "0"}
+>
+  <option value="0">Seleccionar</option>
+  {category.map((cat) => (
+    <option key={cat.id} value={cat.id}>
+      {cat.nombre}
+    </option>
+  ))}
+</select>
                 </div>
               </div>
             </CardBody>
-            <CardFooter className="pt-0 w-80">
-              <Button type="submit" variant="gradient" fullWidth>
-                Registrar Producto
+            <CardFooter className="pt-0 flex gap-2">
+              <Button type="submit" variant="gradient">
+                {formData?.id ? "Actualizar Producto" : "Agregar Producto"}
               </Button>
-              {/* Agrega aquí cualquier otro contenido del pie de tarjeta si es necesario */}
+              <Button
+                variant="text"
+                color="red"
+                onClick={() => {
+                  handleOpen(null), setFormData(iniStateProduct);
+                }}
+                className="mr-1"
+              >
+                <span>Cancel</span>
+              </Button>
             </CardFooter>
           </Card>
         </form>
@@ -189,6 +209,11 @@ const RegisterProduct = ({ getProducts }) => {
 
 RegisterProduct.propTypes = {
   getProducts: PropTypes.func,
+  iniStateProduct: PropTypes.object,
+  product: PropTypes.object,
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  refreshProduct: PropTypes.func
 };
 
 export default RegisterProduct;

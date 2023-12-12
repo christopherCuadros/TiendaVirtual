@@ -2,6 +2,17 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import RegisterProduct from "../../components/modal/RegisterProduct";
 import { destroyProduct, getAllProducts } from "../../services/apiService";
+
+const iniStateProduct = {
+  nombre: "",
+  descripcion: "",
+  precio: 0,
+  stock: 0,
+  imagen: "",
+  idCategoria: 0,
+  estado: true,
+};
+
 export default function Products() {
   const headerTitle = [
     "codigo",
@@ -15,6 +26,9 @@ export default function Products() {
   ];
 
   const [productos, setProductos] = useState(null);
+  const [product, setProduct] = useState(iniStateProduct);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,16 +48,30 @@ export default function Products() {
   };
 
   const destroyUpdate = async (id) => {
-    await destroyProduct(id)
-    const lista = [...productos]
-    const newlist = lista.filter(pro => pro.id != id)
-    setProductos(newlist)
+    await destroyProduct(id);
+    const lista = [...productos];
+    const newlist = lista.filter((pro) => pro.id != id);
+    setProductos(newlist);
+  };
+
+  const refreshProduct = (prod) => {
+    const lista = [...productos];
+    const newlist = lista.filter(e => e.id !== prod.id)
+    const finalList = [...newlist,prod]
+    setProductos(finalList)
   }
 
   return (
     <>
       <div className="py-3">
-        <RegisterProduct getProducts={getProducts} />
+        <RegisterProduct
+          getProducts={getProducts}
+          product={product}
+          iniStateProduct={iniStateProduct}
+          open={open}
+          setOpen={setOpen}
+          refreshProduct={refreshProduct}
+        />
       </div>
       <div>
         <Card className="h-full w-full overflow-scroll">
@@ -134,10 +162,18 @@ export default function Products() {
                       </Typography>
                     </td>
                     <td className="p-4 space-x-2">
-                      <Button variant="gradient" size="sm" color="amber">
+                      <Button variant="gradient" size="sm" color="amber" onClick={ () => {
+                        setProduct(producto)
+                        setOpen(!open)
+                      } }>
                         Edit
                       </Button>
-                      <Button variant="gradient" size="sm" color="red" onClick={()=> destroyUpdate(producto.id)}>
+                      <Button
+                        variant="gradient"
+                        size="sm"
+                        color="red"
+                        onClick={() => destroyUpdate(producto.id)}
+                      >
                         Delet
                       </Button>
                     </td>
