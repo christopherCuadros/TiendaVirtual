@@ -8,7 +8,11 @@ import {
   Typography,
   Input,
 } from "@material-tailwind/react";
-import { getCategoriesProd, postProduct, updateProduct } from "../../services/apiService";
+import {
+  getCategoriesProd,
+  postProduct,
+  updateProduct,
+} from "../../services/apiService";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
@@ -18,7 +22,8 @@ const RegisterProduct = ({
   iniStateProduct,
   open,
   setOpen,
-  refreshProduct
+  refreshProduct,
+  setProduct
 }) => {
   const [category, setCategory] = useState([]);
   const handleOpen = () => setOpen((cur) => !cur);
@@ -43,27 +48,32 @@ const RegisterProduct = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!formData?.id) {
-      
-      const result = await postProduct(formData);
-      if (result.status === true) {
-        getProducts(result.data);
+      if (confirm("Desea registrar el producto")){
+        const result = await postProduct(formData);
+        if (result.status === true) {
+          getProducts(result.data);
   
-        setOpen(!open);
-        setFormData(iniStateProduct);
-        toast("Se registro con exito", {
-          type: "success",
-        });
+          setOpen(!open);
+          setFormData(iniStateProduct);
+          toast("Se registro con exito", {
+            type: "success",
+          });
+        }
       }
-      return;
     }
-    const resultUpdate = await updateProduct(formData)
-    refreshProduct(resultUpdate.data)
-    setOpen(!open);
-        setFormData(iniStateProduct);
+    
+    if(formData.id){
+      if (confirm("Desea actualizar el producto")){
+        const resultUpdate = await updateProduct(formData);
+        refreshProduct(resultUpdate.data);
+        setOpen(!open);
         toast("Se actualizo con exito", {
           type: "success",
         });
+      }
+    }
   };
 
   return (
@@ -71,7 +81,7 @@ const RegisterProduct = ({
       <Button
         variant="gradient"
         size="sm"
-        className="hidden sm:inline-block"
+        className="inline-block"
         onClick={handleOpen}
       >
         Agregar Producto
@@ -169,19 +179,19 @@ const RegisterProduct = ({
                     IdCategoria
                   </Typography>
                   <select
-  className=""
-  onChange={(e) =>
-    handleInputChange("idCategoria", e.target.value)
-  }
-  value={formData.idCategoria.toString() || "0"}
->
-  <option value="0">Seleccionar</option>
-  {category.map((cat) => (
-    <option key={cat.id} value={cat.id}>
-      {cat.nombre}
-    </option>
-  ))}
-</select>
+                    className=""
+                    onChange={(e) =>
+                      handleInputChange("idCategoria", e.target.value)
+                    }
+                    value={formData.idCategoria.toString() || "0"}
+                  >
+                    <option value="0">Seleccionar</option>
+                    {category.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.nombre}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </CardBody>
@@ -193,7 +203,9 @@ const RegisterProduct = ({
                 variant="text"
                 color="red"
                 onClick={() => {
-                  handleOpen(null), setFormData(iniStateProduct);
+                  handleOpen(null),
+                  setFormData(iniStateProduct)
+                  setProduct(iniStateProduct)
                 }}
                 className="mr-1"
               >
@@ -213,7 +225,8 @@ RegisterProduct.propTypes = {
   product: PropTypes.object,
   open: PropTypes.bool,
   setOpen: PropTypes.func,
-  refreshProduct: PropTypes.func
+  refreshProduct: PropTypes.func,
+  setProduct: PropTypes.func
 };
 
 export default RegisterProduct;

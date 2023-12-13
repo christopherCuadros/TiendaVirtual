@@ -2,6 +2,7 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import RegisterProduct from "../../components/modal/RegisterProduct";
 import { destroyProduct, getAllProducts } from "../../services/apiService";
+import TableHead from "../../components/tables/TableHead";
 
 const iniStateProduct = {
   nombre: "",
@@ -13,17 +14,14 @@ const iniStateProduct = {
   estado: true,
 };
 
+const headerTitle = [
+  "Imagen",
+  "Producto",
+  "Detalle",
+  "Acción"
+];
+
 export default function Products() {
-  const headerTitle = [
-    "codigo",
-    "Imagen",
-    "Nombre",
-    "Descripcion",
-    "Precio",
-    "Stock",
-    "Categoria",
-    "Accion",
-  ];
 
   const [productos, setProductos] = useState(null);
   const [product, setProduct] = useState(iniStateProduct);
@@ -71,42 +69,17 @@ export default function Products() {
           open={open}
           setOpen={setOpen}
           refreshProduct={refreshProduct}
+          setProduct={setProduct}
         />
       </div>
       <div>
-        <Card className="h-full w-full overflow-scroll">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {headerTitle.map((head) => (
-                  <th
-                    key={head}
-                    className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal leading-none opacity-70"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
+        <Card className="h-full w-full overflow-y-scroll">
+          <table className="w-full table-auto text-left">
+              <TableHead headerTitle={headerTitle} />
             <tbody>
               {productos &&
                 productos.map((producto) => (
                   <tr key={producto.id} className="even:bg-blue-gray-50/50">
-                    <td className="p-4">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {producto.id}
-                      </Typography>
-                    </td>
                     <td className="p-4">
                       <Typography
                         variant="small"
@@ -118,14 +91,20 @@ export default function Products() {
                     </td>
                     <td className="p-4">
                       <Typography
+                        as="p"
+                        variant="small"
+                        color="blue-gray"
+                        className="font-bold"
+                      >
+                        Nombre: <span className="font-light">{producto.nombre}</span>
+                      </Typography>
+                      <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {producto.nombre}
+                        Categoria: {producto.idCategoria}
                       </Typography>
-                    </td>
-                    <td className="p-4">
                       <Typography
                         variant="small"
                         color="blue-gray"
@@ -140,28 +119,17 @@ export default function Products() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        S/.{producto.precio}
+                        Precio: S/.{producto.precio}
                       </Typography>
-                    </td>
-                    <td className="p-4">
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {producto.stock}
+                        Stock: {producto.stock}
                       </Typography>
                     </td>
-                    <td className="p-4">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {producto.idCategoria}
-                      </Typography>
-                    </td>
-                    <td className="p-4 space-x-2">
+                    <td className="p-4 xl:space-x-2 space-y-2 md:space-y-0">
                       <Button variant="gradient" size="sm" color="amber" onClick={ () => {
                         setProduct(producto)
                         setOpen(!open)
@@ -172,7 +140,11 @@ export default function Products() {
                         variant="gradient"
                         size="sm"
                         color="red"
-                        onClick={() => destroyUpdate(producto.id)}
+                        onClick={() => {
+                          if (confirm("¿Esta seguro de eliminar el producto?")) {
+                            destroyUpdate(producto.id)
+                          }
+                        }}
                       >
                         Delet
                       </Button>

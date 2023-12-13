@@ -16,12 +16,13 @@ import {
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { Bars4Icon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Link, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 export function AdminLayout() {
   const [open, setOpen] = useState(0);
+  const [menu, setMenu] = useState(true);
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -32,7 +33,9 @@ export function AdminLayout() {
       <div className="flex relative bg-gray-100">
         <Card
           color="white"
-          className="h-[100vh] rounded-none rounded-r-md w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-100 relative"
+          className={`h-[100vh] rounded-none rounded-r-md w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-100 relative ${
+            menu ? "block" : "hidden"
+          }`}
         >
           <div className="mb-2 p-4">
             <Typography variant="h5" color="blue-gray">
@@ -74,8 +77,12 @@ export function AdminLayout() {
                 </ListItem>
                 <AccordionBody className="py-1">
                   <List className="p-0">
-                  <Link to="orders"><ListItem>Ordenes</ListItem></Link>
-                  <Link to="products"><ListItem>Productos</ListItem></Link>
+                    <Link to="orders">
+                      <ListItem>Ordenes</ListItem>
+                    </Link>
+                    <Link to="products">
+                      <ListItem>Productos</ListItem>
+                    </Link>
                   </List>
                 </AccordionBody>
               </Accordion>
@@ -89,10 +96,10 @@ export function AdminLayout() {
               </Link>
               <Link to="profile">
                 <ListItem>
-                    <ListItemPrefix>
-                      <UserCircleIcon className="h-5 w-5" />
-                    </ListItemPrefix>
-                    Perfil
+                  <ListItemPrefix>
+                    <UserCircleIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  Perfil
                 </ListItem>
               </Link>
               <ListItem>
@@ -107,8 +114,16 @@ export function AdminLayout() {
         <div className="h-[100vh] overflow-y-scroll p-4 w-full">
           <Outlet />
         </div>
+        <button
+          className="absolute bottom-5 right-10 rounded-full bg-black border-2 border-black p-2 group transition-all duration-150 hover:bg-white"
+          onClick={() => {
+            setMenu(!menu);
+          }}
+        >
+          <Bars4Icon className="h-6 w-6 text-white transition-all duration-150 group-hover:text-black" />
+        </button>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }
